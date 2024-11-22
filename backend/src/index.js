@@ -12,6 +12,7 @@ import authRoutes from "./routes/auth.route.js";
 import songRoutes from "./routes/song.route.js";
 import albumRoutes from "./routes/album.route.js";
 import statRoutes from "./routes/stat.route.js";
+import { error } from "console";
 
 dotenv.config();
 
@@ -42,7 +43,14 @@ app.use("/api/stats", statRoutes);
 
 //error handler
 app.use((err, req, res, next) => {
-  res.status(500).json({ message: err.message });
+  res
+    .status(500)
+    .json({
+      message:
+        process.env.NODE_ENV === "production"
+          ? "Internal server error"
+          : error.message,
+    });
 });
 
 app.get("/");
@@ -50,3 +58,7 @@ app.listen(PORT, () => {
   console.log("server is listening on port " + PORT);
   connectDB();
 });
+
+
+//todo: socket.io will be implement
+
