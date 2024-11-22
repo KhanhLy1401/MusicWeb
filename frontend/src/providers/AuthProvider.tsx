@@ -23,7 +23,8 @@ const AuthProvider = ({children}: {children:React.ReactNode}) => {
     useEffect(() => {
         const initAuth = async () => {
             try {
-                const token = await getToken()
+                const token = await getToken();
+                console.log("Token:", token);
                 updateApiToken(token)
 
                 
@@ -31,7 +32,11 @@ const AuthProvider = ({children}: {children:React.ReactNode}) => {
                 updateApiToken(null);
                 console.log("error in auth provider", error);
             } finally {
-                setLoading(false);
+                setTimeout(() => {
+                    setLoading(false);
+                    console.log("Loading state:", loading);
+                  }, 2000);
+            
             }
         }
         // hàm bất đồng bộ để lấy token thông qua getToken() từ useAuth() thư viện clerk
@@ -40,7 +45,7 @@ const AuthProvider = ({children}: {children:React.ReactNode}) => {
 
     if(loading) return (
         <div className="h-screen w-full flex items-center justify-center">
-            <Loader className="size-8 text-emerald-500 animate-spin"/>
+            <Loader className="w-8 h-8 text-emerald-500 animate-spin"/>
         </div>
     )
     return (
