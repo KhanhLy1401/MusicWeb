@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import { clerkMiddleware } from "@clerk/express";
 import fileUpLoad from "express-fileupload";
 import path from "path";
+import cors from "cors"
 
 import { connectDB } from "./lib/db.js";
 
@@ -22,6 +23,12 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json()); // to parse Json data
 
+app.use( cors(
+  {
+    origin: "http://localhost:3000",
+    credentials: true,
+  }
+))
 app.use(clerkMiddleware); // this will add auth to req obj => req.auth
 app.use(
   fileUpLoad({

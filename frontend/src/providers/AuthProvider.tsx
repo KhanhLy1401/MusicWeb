@@ -5,7 +5,7 @@ import { useAuth } from "@clerk/clerk-react";
 import { Loader } from "lucide-react";
 import { useEffect, useState } from "react";
 
-
+//Update header Axios
 const updateApiToken = (token: string | null) => {
 	if (token) axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 	else delete axiosInstance.defaults.headers.common["Authorization"];
@@ -13,14 +13,14 @@ const updateApiToken = (token: string | null) => {
 
 const AuthProvider = ({children}: {children:React.ReactNode}) => {
 
-    const {getToken, userId} = useAuth();
-    const [loading, setLoading] = useState(true);
+    const {getToken, userId} = useAuth(); //Get token and userId from useAuth
+    const [loading, setLoading] = useState(true); //State loading
 
 
     useEffect(() => {
         const initAuth = async () => {
 			try {
-				const token = await getToken();
+				const token = await getToken(); //get token from useAuth()
 				updateApiToken(token);
 			
 			} catch (error: any) {
