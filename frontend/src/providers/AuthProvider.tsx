@@ -11,7 +11,7 @@ const updateApiToken = (token: string | null) => {
 	else delete axiosInstance.defaults.headers.common["Authorization"];
 };
 
-const AuthProvider = ({children}: {children:React.ReactNode}) => {
+const AuthProvider = ({ children }: { children: React.ReactNode })=> {
 
     const {getToken, userId} = useAuth(); //Get token and userId from useAuth
     const [loading, setLoading] = useState(true); //State loading
