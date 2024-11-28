@@ -1,9 +1,11 @@
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors"
 import { clerkMiddleware } from "@clerk/express";
 import fileUpLoad from "express-fileupload";
 import path from "path";
-import cors from "cors"
+
+
 
 import { connectDB } from "./lib/db.js";
 
@@ -26,10 +28,11 @@ app.use(express.json()); // to parse Json data
 app.use( cors(
   {
     origin: "http://localhost:3000",
-    credentials: true,
+    credentials: true, // Cho phép gửi cookie và thông tin xác thực
   }
 ))
-app.use(clerkMiddleware); // this will add auth to req obj => req.auth
+
+// app.use(clerkMiddleware); // this will add auth to req obj => req.auth
 app.use(
   fileUpLoad({
     useTempFiles: true,
@@ -50,7 +53,6 @@ app.use("/api/stats", statRoutes);
 
 //error handler
 app.use((err, req, res, next) => {
-  app.use((err, req, res, next) => {
     res
       .status(500)
       .json({
@@ -59,7 +61,6 @@ app.use((err, req, res, next) => {
             ? "Internal server error"
             : err.message,
       });
-  });
 });
 
 app.get("/");
