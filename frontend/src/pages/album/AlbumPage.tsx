@@ -1,5 +1,7 @@
+import { Button } from '@/components/ui/button';
 import { useMusicStore } from '@/stores/useMusicStore';
 import { ScrollArea } from '@radix-ui/react-scroll-area'
+import { Play } from 'lucide-react';
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
@@ -34,6 +36,16 @@ const AlbumPage = () => {
                         </div>
                     </div>
 
+                    {/* Play button */}
+                    <div className='px-6 pb-4 flex items-center gap-6'>
+                        <Button size='icon'
+                        className='w-14 h-14 rounded-full bg-green-500 hover:bg-green-400 hover:scale-105 transition-all'>
+                            <Play className='h-7 w-7 text-black' />
+                        </Button>
+                    </div>
+
+                    {/* Table section */}
+                    
                 </div>
             </div>
         </ScrollArea>
