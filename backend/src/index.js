@@ -5,6 +5,9 @@ import { clerkMiddleware } from "@clerk/express";
 import fileUpLoad from "express-fileupload";
 import path from "path";
 
+// import verifyToken from "./middleware/verifyToken.js";
+
+
 
 
 import { connectDB } from "./lib/db.js";
@@ -15,7 +18,6 @@ import authRoutes from "./routes/auth.route.js";
 import songRoutes from "./routes/song.route.js";
 import albumRoutes from "./routes/album.route.js";
 import statRoutes from "./routes/stat.route.js";
-// import { error } from "console";
 
 dotenv.config();
 
@@ -32,7 +34,12 @@ app.use( cors(
   }
 ))
 
+
 // app.use(clerkMiddleware); // this will add auth to req obj => req.auth
+
+
+// app.use(verifyToken);
+
 app.use(
   fileUpLoad({
     useTempFiles: true,
